@@ -2,32 +2,38 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() async {
-  final wsUrl = Uri.parse('ws://192.168.0.207:81');
-  const connectTimeout = Duration(milliseconds: 500);
-  print('Connecting to $wsUrl');
-  final channel = WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
-  print('Connected to $wsUrl');
+  try {
+    final wsUrl = Uri.parse('ws://192.168.0.207:81');
+    const connectTimeout = Duration(milliseconds: 500);
+    print('Connecting to $wsUrl');
+    final channel = WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+    print('Connected to $wsUrl');
 
-  await channel.ready;
+    await channel.ready;
 
-  print('Channel ready');
+    print('Channel ready');
 
-  channel.stream.listen(
-    (data) async {
-      print('Received data: $data');
-    },
-    onDone: () {
-      print('Channel closed');
-    },
-    onError: (error) {
-      print('Channel error: $error');
-    },
-  );
+    channel.stream.listen(
+      (data) async {
+        print('Received data: $data');
+      },
+      onDone: () {
+        print('Channel closed');
+      },
+      onError: (error) {
+        print('Channel error: $error');
+      },
+    );
 
-  print('Sending message');
-  channel.sink.add('hello!');
+    print('Sending message');
+    channel.sink.add('hello!');
+  } on TimeoutException catch (e) {
+    print('TimeoutException occurred: $e');
+  }
 }
