@@ -5,6 +5,27 @@ Added a timeout to the `WebSocketChannel.connect` method. It's being passed down
 ```dart
   WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
 ```
+see example.dart:
+
+```dart
+import 'package:web_socket_channel/status.dart' as status;
+import 'package:web_socket_channel/web_socket_channel.dart';
+
+main() async {
+  final wsUrl = Uri.parse('ws://example.com');
+
+  const connectTimeout = Duration(milliseconds: 500);
+  final channel = WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+
+  await channel.ready;
+
+  channel.stream.listen((message) {
+    channel.sink.add('received!');
+    channel.sink.close(status.goingAway);
+  });
+}
+```
+
 Forked from original version: https://github.com/dart-lang/web_socket_channel
 
 ### Installation instructions follow

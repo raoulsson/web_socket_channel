@@ -5,16 +5,29 @@
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-main() async {
-  final wsUrl = Uri.parse('ws://example.com');
-
+void main() async {
+  final wsUrl = Uri.parse('ws://192.168.0.207:81');
   const connectTimeout = Duration(milliseconds: 500);
+  print('Connecting to $wsUrl');
   final channel = WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+  print('Connected to $wsUrl');
 
   await channel.ready;
 
-  channel.stream.listen((message) {
-    channel.sink.add('received!');
-    channel.sink.close(status.goingAway);
-  });
+  print('Channel ready');
+
+  channel.stream.listen(
+    (data) async {
+      print('Received data: $data');
+    },
+    onDone: () {
+      print('Channel closed');
+    },
+    onError: (error) {
+      print('Channel error: $error');
+    },
+  );
+
+  print('Sending message');
+  channel.sink.add('hello!');
 }
