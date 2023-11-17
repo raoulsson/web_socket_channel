@@ -28,7 +28,15 @@ main() async {
 
 Forked from original version: https://github.com/dart-lang/web_socket_channel
 
-### Installation instructions follow
+### Installation from GitHub
+
+```yaml
+dependencies:
+  web_socket_channel:
+    git:
+      url: https://github.com/raoulsson/web_socket_channel.git
+      ref: v2.4.0 # tag
+```
 ___
 
 [![CI](https://github.com/dart-lang/web_socket_channel/actions/workflows/test-package.yml/badge.svg?branch=master)](https://github.com/dart-lang/web_socket_channel/actions/workflows/test-package.yml)
