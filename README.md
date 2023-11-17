@@ -1,3 +1,13 @@
+# Tweaked version: Timeout
+
+Added a timeout to the `WebSocketChannel.connect` method. It's being passed down to the `WebSocket.connect` method.
+
+```dart
+  WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+```
+
+___
+
 [![CI](https://github.com/dart-lang/web_socket_channel/actions/workflows/test-package.yml/badge.svg?branch=master)](https://github.com/dart-lang/web_socket_channel/actions/workflows/test-package.yml)
 
 The `web_socket_channel` package provides [`StreamChannel`][stream_channel]

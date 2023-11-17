@@ -12,5 +12,5 @@ import '../web_socket_channel.dart';
 /// communicate over the resulting socket.
 ///
 /// The optional [protocols] parameter is the same as `WebSocket.connect`.
-WebSocketChannel connect(Uri uri, {Iterable<String>? protocols}) =>
-    HtmlWebSocketChannel.connect(uri, protocols: protocols);
+WebSocketChannel connect(Uri uri, {Iterable<String>? protocols, Duration? connectTimeout}) =>
+    HtmlWebSocketChannel.connect(uri, protocols: protocols, connectTimeout: connectTimeout);

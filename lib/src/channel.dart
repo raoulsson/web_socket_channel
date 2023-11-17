@@ -140,8 +140,8 @@ class WebSocketChannel extends StreamChannelMixin {
   /// The [ready] future will complete after the channel is connected.
   /// If there are errors creating the connection the [ready] future will
   /// complete with an error.
-  factory WebSocketChannel.connect(Uri uri, {Iterable<String>? protocols}) =>
-      platform.connect(uri, protocols: protocols);
+  factory WebSocketChannel.connect(Uri uri, {Iterable<String>? protocols, Duration? connectTimeout}) =>
+      platform.connect(uri, protocols: protocols, connectTimeout: connectTimeout);
 }
 
 /// The sink exposed by a [WebSocketChannel].
