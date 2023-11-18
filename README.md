@@ -1,4 +1,4 @@
-## Tweaked version: Adding Connection Timeout
+## Tweaked version: Adding Connection Timeout and "sync" connection establishment through "await"
 
 Added a timeout to the `WebSocketChannel.connect` method. It's being passed down to the `WebSocket.connect` method.
 
@@ -24,6 +24,18 @@ main() async {
     channel.sink.close(status.goingAway);
   });
 }
+```
+
+If you need to fail fast when trying to create the channel with the socket, see example_await.dart:
+
+```dart
+WebSocketChannel? channel;
+    try {
+      channel = await IOWebSocketChannel.connectWebSocketChannel(wsUrl, connectTimeout: connectTimeout);
+      print('Connected to $wsUrl');
+    } on WebSocketChannelException catch (e) {
+      print('Exception on connect occurred: $e');
+    }
 ```
 
 Forked from original version: https://github.com/dart-lang/web_socket_channel

@@ -2,3 +2,5 @@
 .packages
 pubspec.lock
 .idea
+example/test1.dart
+example/test2.dart
