@@ -79,13 +79,13 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
   /// If there's an error connecting, the channel's stream emits a
   /// [WebSocketChannelException] wrapping that error and then closes.
   factory IOWebSocketChannel.connect(
-    Object url, {
-    Iterable<String>? protocols,
-    Map<String, dynamic>? headers,
-    Duration? pingInterval,
-    Duration? connectTimeout,
-    HttpClient? customClient,
-  }) {
+      Object url, {
+        Iterable<String>? protocols,
+        Map<String, dynamic>? headers,
+        Duration? pingInterval,
+        Duration? connectTimeout,
+        HttpClient? customClient,
+      }) {
     late IOWebSocketChannel channel;
     final sinkCompleter = WebSocketSinkCompleter();
     var future = WebSocket.connect(
@@ -128,13 +128,13 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
 
   /// New, async version of the above method. Useful to fail fast when called with await.
   static Future<IOWebSocketChannel> connectWebSocketChannel(
-    Object url, {
-    Iterable<String>? protocols,
-    Map<String, dynamic>? headers,
-    Duration? pingInterval,
-    Duration? connectTimeout = const Duration(seconds: 30),
-    HttpClient? customClient,
-  }) async {
+      Object url, {
+        Iterable<String>? protocols,
+        Map<String, dynamic>? headers,
+        Duration? pingInterval,
+        Duration? connectTimeout = const Duration(seconds: 30),
+        HttpClient? customClient,
+      }) async {
     final completer = Completer<IOWebSocketChannel>();
     late IOWebSocketChannel channel;
     try {
@@ -149,7 +149,7 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       final readyCompleter = Completer<void>();
       channel = IOWebSocketChannel._(
         stream: webSocket.handleError(
-          (error) => throw WebSocketChannelException.from(error),
+              (error) => throw WebSocketChannelException.from(error),
         ),
         sink: _IOWebSocketSink(webSocket),
         webSocket: webSocket,
