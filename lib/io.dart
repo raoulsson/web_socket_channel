@@ -159,6 +159,9 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       readyCompleter.complete();
       completer.complete(channel);
     } catch (error) {
+      if (channel._webSocket != null) {
+        await channel._webSocket?.close();
+      }
       completer.completeError(
         WebSocketChannelException.from(error),
         StackTrace.current,
