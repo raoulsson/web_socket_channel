@@ -136,7 +136,7 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
         HttpClient? customClient,
       }) async {
     final completer = Completer<IOWebSocketChannel>();
-    late IOWebSocketChannel channel;
+    IOWebSocketChannel? channel;
     try {
       final webSocket = await WebSocket.connect(
         url.toString(),
@@ -159,8 +159,8 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       readyCompleter.complete();
       completer.complete(channel);
     } catch (error) {
-      if (channel._webSocket != null) {
-        await channel._webSocket?.close();
+      if (channel?._webSocket != null) {
+        await channel?._webSocket?.close();
       }
       completer.completeError(
         WebSocketChannelException.from(error),
