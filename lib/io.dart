@@ -169,6 +169,20 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
     }
     return completer.future;
   }
+
+  Future<void> closeConnection(IOWebSocketChannel channel) async {
+    try {
+      if (channel.innerWebSocket != null && channel.innerWebSocket!.readyState != WebSocket.closed) {
+        await channel.innerWebSocket?.close();
+        print('WebSocket connection closed successfully.');
+      } else {
+        print('WebSocket connection was already closed.');
+      }
+    } catch (e) {
+      print('Error closing WebSocket connection: $e');
+    }
+  }
+
 }
 
 /// A [WebSocketSink] that forwards [close] calls to a `dart:io` [WebSocket].
