@@ -170,7 +170,7 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
     return completer.future;
   }
 
-  Future<void> closeConnection(IOWebSocketChannel channel) async {
+  static Future<void> closeConnection(IOWebSocketChannel channel) async {
     try {
       if (channel.innerWebSocket != null && channel.innerWebSocket!.readyState != WebSocket.closed) {
         await channel.innerWebSocket?.close();
