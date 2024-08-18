@@ -174,6 +174,11 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
     try {
       if (channel.innerWebSocket != null && channel.innerWebSocket!.readyState != WebSocket.closed) {
         await channel.innerWebSocket?.close();
+        channel._readyCompleter.complete();
+        if (channel._webSocket != null) {
+          await channel._webSocket?.close();
+        }
+        channel._webSocket = null;
         // print('WebSocket connection closed successfully.');
       } else {
         print('WebSocket connection was already closed.');
