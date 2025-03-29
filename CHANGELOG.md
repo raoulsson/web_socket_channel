@@ -1,3 +1,7 @@
+## 2.5.0 - 2024-03-29
+
+- Fixed version to be continuous with previous tags.
+
 ## 2.4.2 - 2024-03-29
 
 - Updated dependencies to the latest versions.
