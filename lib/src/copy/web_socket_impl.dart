@@ -881,7 +881,7 @@ class WebSocketImpl extends Stream with _ServiceObject implements StreamSink {
 int _nextServiceId = 1;
 
 // TODO(ajohnsen): Use other way of getting a uniq id.
-abstract class _ServiceObject {
+mixin _ServiceObject {
   int __serviceId = 0;
 
   int get _serviceId {

@@ -1,3 +1,9 @@
+## 2.4.2 - 2024-03-29
+
+- Updated dependencies to the latest versions.
+- Changed _ServiceObject to mixin.
+
+
 ## 2.4.1-wip
 
 - Update the examples to use `WebSocketChannel.ready` and clarify that
