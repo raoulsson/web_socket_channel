@@ -1,6 +1,7 @@
 ## 2.5.0 - 2024-03-29
 
 - Fixed version to be continuous with previous tags.
+- Downgraded test: ^1.24.15
 
 ## 2.4.2 - 2024-03-29
 
