@@ -140,8 +140,10 @@ class WebSocketChannel extends StreamChannelMixin {
   /// The [ready] future will complete after the channel is connected.
   /// If there are errors creating the connection the [ready] future will
   /// complete with an error.
-  factory WebSocketChannel.connect(Uri uri, {Iterable<String>? protocols, Duration? connectTimeout}) =>
-      platform.connect(uri, protocols: protocols, connectTimeout: connectTimeout);
+  factory WebSocketChannel.connect(Uri uri,
+          {Iterable<String>? protocols, Duration? connectTimeout}) =>
+      platform.connect(uri,
+          protocols: protocols, connectTimeout: connectTimeout);
 }
 
 /// The sink exposed by a [WebSocketChannel].
@@ -151,6 +153,7 @@ class WebSocketChannel extends StreamChannelMixin {
 class WebSocketSink extends DelegatingStreamSink {
   final WebSocketImpl _webSocket;
 
+  // ignore: use_super_parameters
   WebSocketSink._(WebSocketImpl webSocket)
       : _webSocket = webSocket,
         super(webSocket);

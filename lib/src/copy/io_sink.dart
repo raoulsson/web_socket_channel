@@ -11,6 +11,9 @@
 // This is up-to-date as of sdk revision
 // 365f7b5a8b6ef900a5ee23913b7203569b81b175.
 
+// ignore_for_file: lines_longer_than_80_chars, package_api_docs
+// ignore_for_file: prefer_final_locals, prefer_expression_function_bodies
+
 import 'dart:async';
 
 class StreamSinkImpl<T> implements StreamSink<T> {

@@ -3,6 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 
 @TestOn('vm')
+library;
+
 import 'dart:async';
 import 'dart:io';
 
@@ -65,12 +67,10 @@ void main() {
 
     channel.sink.add('ping');
 
-    channel.stream.listen(
-        expectAsync1((message) {
-          expect(message, equals('pong'));
-          channel.sink.close(5678, 'raisin');
-        }, count: 1),
-        onDone: expectAsync0(() {}));
+    channel.stream.listen(expectAsync1((message) {
+      expect(message, equals('pong'));
+      channel.sink.close(5678, 'raisin');
+    }), onDone: expectAsync0(() {}));
   });
 
   test('.connect communicates immediately using platform independent api',
@@ -92,12 +92,10 @@ void main() {
 
     channel.sink.add('ping');
 
-    channel.stream.listen(
-        expectAsync1((message) {
-          expect(message, equals('pong'));
-          channel.sink.close(5678, 'raisin');
-        }, count: 1),
-        onDone: expectAsync0(() {}));
+    channel.stream.listen(expectAsync1((message) {
+      expect(message, equals('pong'));
+      channel.sink.close(5678, 'raisin');
+    }), onDone: expectAsync0(() {}));
   });
 
   test('.connect with an immediate call to close', () async {

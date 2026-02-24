@@ -11,7 +11,8 @@
 // This is up-to-date as of sdk revision
 // 365f7b5a8b6ef900a5ee23913b7203569b81b175.
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, package_api_docs
+// ignore_for_file: lines_longer_than_80_chars
 
 /// Web socket status codes used when closing a web socket connection.
 abstract class WebSocketStatus {

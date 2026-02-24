@@ -13,6 +13,18 @@
 // 365f7b5a8b6ef900a5ee23913b7203569b81b175.
 
 // ignore_for_file: unused_field, constant_identifier_names
+// ignore_for_file: avoid_classes_with_only_static_members
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+// ignore_for_file: avoid_returning_null_for_void, avoid_void_async
+// ignore_for_file: cancel_subscriptions, comment_references
+// ignore_for_file: lines_longer_than_80_chars, literal_only_boolean_expressions
+// ignore_for_file: non_constant_identifier_names, only_throw_errors
+// ignore_for_file: prefer_const_constructors, prefer_final_locals
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: prefer_interpolation_to_compose_strings
+// ignore_for_file: unnecessary_parenthesis, unnecessary_string_interpolations
+// ignore_for_file: package_api_docs, avoid_catching_errors
+// ignore_for_file: prefer_initializing_formals, no_runtimeType_toString
 
 import 'dart:async';
 import 'dart:convert';
@@ -55,7 +67,7 @@ class _WebSocketOpcode {
 
 /// The web socket protocol transformer handles the protocol byte stream
 /// which is supplied through the `handleData`. As the protocol is processed,
-/// it'll output frame data as either a List<int> or String.
+/// it'll output frame data as either a `List<int>` or `String`.
 ///
 /// Important information about usage: Be sure you use cancelOnError, so the
 /// socket will be closed when the processor encounter an error. Not using it
@@ -568,7 +580,6 @@ class _WebSocketConsumer implements StreamConsumer {
   final StreamSink<List<int>> sink;
   StreamController? _controller;
 
-  // ignore: cancel_subscriptions
   StreamSubscription? _subscription;
   bool _issuedPause = false;
   bool _closed = false;
@@ -695,7 +706,6 @@ class WebSocketImpl extends Stream with _ServiceObject implements StreamSink {
 
   late final StreamController _controller;
 
-  // ignore: cancel_subscriptions
   StreamSubscription? _subscription;
   late final StreamSink _sink;
 

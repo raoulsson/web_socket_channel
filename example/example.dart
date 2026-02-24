@@ -9,7 +9,8 @@ Future<void> main() async {
   final wsUrl = Uri.parse('ws://example.com');
 
   const connectTimeout = Duration(milliseconds: 500);
-  final channel = WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+  final channel =
+      WebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
 
   await channel.ready;
 

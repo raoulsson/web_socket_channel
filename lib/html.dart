@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:html';
 import 'dart:typed_data';
@@ -36,13 +38,13 @@ class HtmlWebSocketChannel extends StreamChannelMixin
   /// The close code set by the local user.
   ///
   /// To ensure proper ordering, this is stored until we get a done event on
-  /// [_controller.local.stream].
+  /// `_controller.local.stream`.
   int? _localCloseCode;
 
   /// The close reason set by the local user.
   ///
   /// To ensure proper ordering, this is stored until we get a done event on
-  /// [_controller.local.stream].
+  /// `_controller.local.stream`.
   String? _localCloseReason;
 
   /// Completer for [ready].
@@ -72,7 +74,10 @@ class HtmlWebSocketChannel extends StreamChannelMixin
   /// binary messages to be delivered as [Uint8List]s. If it's
   /// [BinaryType.blob], they're delivered as [Blob]s instead.
   HtmlWebSocketChannel.connect(url,
-      {Iterable<String>? protocols, BinaryType? binaryType, Duration? connectTimeout})
+      {Iterable<String>? protocols,
+      BinaryType? binaryType,
+      // ignore: avoid_unused_constructor_parameters
+      Duration? connectTimeout})
       : this(WebSocket(url.toString(), protocols)
           ..binaryType = (binaryType ?? BinaryType.list).value);
 

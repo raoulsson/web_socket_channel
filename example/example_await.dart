@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// ignore_for_file: avoid_print
+
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -21,7 +23,7 @@ Future<void> main() async {
     print('Exception on connect occurred: $e');
   }
 
-  if(channel == null) {
+  if (channel == null) {
     print('Channel is null');
     return;
   }

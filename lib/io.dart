@@ -12,8 +12,11 @@ import 'src/channel.dart';
 import 'src/exception.dart';
 import 'src/sink_completer.dart';
 
+// ignore_for_file: avoid_print
+
 /// A [WebSocketChannel] that communicates using a `dart:io` [WebSocket].
-class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel {
+class IOWebSocketChannel extends StreamChannelMixin
+    implements WebSocketChannel {
   /// The underlying `dart:io` [WebSocket].
   ///
   /// If the channel was constructed with [IOWebSocketChannel.connect], this is
@@ -50,12 +53,12 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
   /// Private constructor for internal use by connectWebSocketChannel
   IOWebSocketChannel._({
     required Stream stream,
-    required WebSocketSink sink,
+    required this.sink,
     required WebSocket? webSocket,
     required Completer<void> readyCompleter,
   })  : _webSocket = webSocket,
-        stream = stream.handleError((error) => throw WebSocketChannelException.from(error)),
-        sink = sink,
+        stream = stream.handleError(
+            (error) => throw WebSocketChannelException.from(error)),
         _readyCompleter = readyCompleter;
 
   /// Creates a new WebSocket connection.
@@ -79,13 +82,13 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
   /// If there's an error connecting, the channel's stream emits a
   /// [WebSocketChannelException] wrapping that error and then closes.
   factory IOWebSocketChannel.connect(
-      Object url, {
-        Iterable<String>? protocols,
-        Map<String, dynamic>? headers,
-        Duration? pingInterval,
-        Duration? connectTimeout,
-        HttpClient? customClient,
-      }) {
+    Object url, {
+    Iterable<String>? protocols,
+    Map<String, dynamic>? headers,
+    Duration? pingInterval,
+    Duration? connectTimeout,
+    HttpClient? customClient,
+  }) {
     late IOWebSocketChannel channel;
     final sinkCompleter = WebSocketSinkCompleter();
     var future = WebSocket.connect(
@@ -107,13 +110,15 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       channel._readyCompleter.completeError(error, stackTrace);
       throw WebSocketChannelException.from(error);
     }));
-    return channel = IOWebSocketChannel._withoutSocket(stream, sinkCompleter.sink);
+    return channel =
+        IOWebSocketChannel._withoutSocket(stream, sinkCompleter.sink);
   }
 
   /// Creates a channel wrapping [socket].
   IOWebSocketChannel(WebSocket socket)
       : _webSocket = socket,
-        stream = socket.handleError((error) => throw WebSocketChannelException.from(error)),
+        stream = socket.handleError(
+            (error) => throw WebSocketChannelException.from(error)),
         sink = _IOWebSocketSink(socket),
         _readyCompleter = Completer()..complete();
 
@@ -123,18 +128,20 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
   /// has a socket added.
   IOWebSocketChannel._withoutSocket(Stream stream, this.sink)
       : _webSocket = null,
-        stream = stream.handleError((error) => throw WebSocketChannelException.from(error)),
+        stream = stream.handleError(
+            (error) => throw WebSocketChannelException.from(error)),
         _readyCompleter = Completer();
 
-  /// New, async version of the above method. Useful to fail fast when called with await.
+  /// New, async version of the above method.
+  /// Useful to fail fast when called with await.
   static Future<IOWebSocketChannel> connectWebSocketChannel(
-      Object url, {
-        Iterable<String>? protocols,
-        Map<String, dynamic>? headers,
-        Duration? pingInterval,
-        Duration? connectTimeout = const Duration(seconds: 30),
-        HttpClient? customClient,
-      }) async {
+    Object url, {
+    Iterable<String>? protocols,
+    Map<String, dynamic>? headers,
+    Duration? pingInterval,
+    Duration? connectTimeout = const Duration(seconds: 30),
+    HttpClient? customClient,
+  }) async {
     final completer = Completer<IOWebSocketChannel>();
     IOWebSocketChannel? channel;
     try {
@@ -149,7 +156,7 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       final readyCompleter = Completer<void>();
       channel = IOWebSocketChannel._(
         stream: webSocket.handleError(
-              (error) => throw WebSocketChannelException.from(error),
+          (error) => throw WebSocketChannelException.from(error),
         ),
         sink: _IOWebSocketSink(webSocket),
         webSocket: webSocket,
@@ -172,7 +179,8 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
 
   static Future<void> closeConnection(IOWebSocketChannel channel) async {
     try {
-      if (channel.innerWebSocket != null && channel.innerWebSocket!.readyState != WebSocket.closed) {
+      if (channel.innerWebSocket != null &&
+          channel.innerWebSocket!.readyState != WebSocket.closed) {
         await channel.innerWebSocket?.close();
         channel._webSocket = null;
         // print('WebSocket connection closed successfully.');
@@ -183,7 +191,6 @@ class IOWebSocketChannel extends StreamChannelMixin implements WebSocketChannel 
       print('Error closing WebSocket connection: $e');
     }
   }
-
 }
 
 /// A [WebSocketSink] that forwards [close] calls to a `dart:io` [WebSocket].
@@ -191,10 +198,12 @@ class _IOWebSocketSink extends DelegatingStreamSink implements WebSocketSink {
   /// The underlying socket.
   final WebSocket _webSocket;
 
+  // ignore: use_super_parameters
   _IOWebSocketSink(WebSocket webSocket)
       : _webSocket = webSocket,
         super(webSocket);
 
   @override
-  Future close([int? closeCode, String? closeReason]) => _webSocket.close(closeCode, closeReason);
+  Future close([int? closeCode, String? closeReason]) =>
+      _webSocket.close(closeCode, closeReason);
 }
