@@ -4,4 +4,4 @@ pubspec.lock
 .idea
 example/test1.dart
 example/test2.dart
-web_socket_channel.iml
+*.iml
