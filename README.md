@@ -1,11 +1,19 @@
-# DISCONTINUED
+# web_socket_channel
 
-**This fork is no longer maintained. Use the upstream package instead: [`web_socket_channel`](https://pub.dev/packages/web_socket_channel) `>=3.0.0`.**
-
-The only reason this fork existed was to add a `connectTimeout` to `WebSocketChannel.connect`.
-That feature has since been merged upstream: as of **3.0.0**, `IOWebSocketChannel.connect`
-accepts a `connectTimeout` natively, with the same semantics (a `TimeoutException` is thrown
-when the connect does not complete in time).
+> ## DISCONTINUED
+>
+> **This fork is no longer maintained. Use the upstream package instead:**
+> **[`web_socket_channel`](https://pub.dev/packages/web_socket_channel) `>=3.0.0`.**
+>
+> This fork existed only to add a `connectTimeout` to `WebSocketChannel.connect`.
+> That feature was merged upstream in `3.0.0`: `IOWebSocketChannel.connect` now
+> accepts `connectTimeout` natively, with the same semantics (a
+> `TimeoutException` is thrown when the connect does not complete in time). The
+> only known consumer, `gemma_http_app_2`, was migrated back to upstream `^3.0.3`
+> on 2026-07-16.
+>
+> Nothing here will receive further updates. Do not add new dependencies on this
+> repository. Migration details are below.
 
 Migration:
 
