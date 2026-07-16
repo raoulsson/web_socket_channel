@@ -1,3 +1,10 @@
+## 2.7.0 - 2026-07-16
+
+- DISCONTINUED. The `connectTimeout` feature this fork added is now available upstream
+  (`web_socket_channel` >=3.0.0). Migrate to `web_socket_channel: ^3.0.3`; see README for the
+  `connectWebSocketChannel` -> `connect(...) + await ready` mapping. No code changes in this
+  release; docs only.
+
 ## 2.5.0 - 2024-03-29
 
 - Fixed version to be continuous with previous tags.

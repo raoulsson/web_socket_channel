@@ -1,4 +1,50 @@
+# DISCONTINUED
+
+**This fork is no longer maintained. Use the upstream package instead: [`web_socket_channel`](https://pub.dev/packages/web_socket_channel) `>=3.0.0`.**
+
+The only reason this fork existed was to add a `connectTimeout` to `WebSocketChannel.connect`.
+That feature has since been merged upstream: as of **3.0.0**, `IOWebSocketChannel.connect`
+accepts a `connectTimeout` natively, with the same semantics (a `TimeoutException` is thrown
+when the connect does not complete in time).
+
+Migration:
+
+```yaml
+# before (this fork)
+dependencies:
+  web_socket_channel:
+    git:
+      url: https://github.com/raoulsson/web_socket_channel.git
+      ref: 2.6.1
+
+# after (upstream)
+dependencies:
+  web_socket_channel: ^3.0.3
+```
+
+The one API this fork added that has no upstream equivalent is the fail-fast helper
+`IOWebSocketChannel.connectWebSocketChannel(...)`. Replace it with the native
+`connect` + `ready`:
+
+```dart
+// before
+final channel = await IOWebSocketChannel.connectWebSocketChannel(
+    wsUrl, connectTimeout: connectTimeout);
+
+// after
+final channel = IOWebSocketChannel.connect(wsUrl, connectTimeout: connectTimeout);
+await channel.ready; // throws WebSocketChannelException on failure,
+                     // TimeoutException on timeout
+```
+
+Note that upstream `3.0.x` dropped `dart:html` in favour of the `web` / `web_socket`
+packages and requires Dart SDK `>=3.3.0`.
+
+---
+
 ## Tweaked version: Adding Connection Timeout and "sync" connection establishment through "await"
+
+_(Historical — see the discontinuation notice above.)_
 
 Added a timeout to the `WebSocketChannel.connect` method. It's being passed down to the `WebSocket.connect` method.
 

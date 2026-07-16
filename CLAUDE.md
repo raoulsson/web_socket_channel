@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Status: DISCONTINUED
+
+This fork is no longer maintained. Its only reason to exist — adding a `connectTimeout` to
+`WebSocketChannel.connect` — was merged upstream in `web_socket_channel` 3.0.0, which now
+supports `connectTimeout` natively on `IOWebSocketChannel.connect`. New work should use the
+upstream package (`web_socket_channel: ^3.0.3`); see `README.md` for the migration path. The
+fork-only helper `IOWebSocketChannel.connectWebSocketChannel` maps to upstream
+`connect(...) + await channel.ready`.
+
+The content below documents the fork as it stands for anyone still working in this tree.
+
 ## Project Overview
 
 Forked Dart package (`web_socket_channel`) providing cross-platform WebSocket `StreamChannel` wrappers. Adds connection timeout support and async connection establishment on top of the original `dart-lang/web_socket_channel`.
@@ -52,9 +63,9 @@ Platform implementations:
 
 ## Code Style
 
-- Line length: 80 characters
+- Line length: 80 characters (`lines_longer_than_80_chars` lint enforced)
 - Strict casts enabled (`strict-casts: true`)
-- Linter extends `package:pedantic` with 70+ additional rules
+- Lints: `include: package:flutter_lints/flutter.yaml` plus ~70 explicitly listed rules in `analysis_options.yaml`
 - Prefer relative imports, `const` constructors, final locals, expression function bodies
 - `package_api_docs` required for public API
 
